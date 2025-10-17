@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const overlayEmail = document.querySelector(".overlay-email");
   const submitButton = form?.querySelector("button[type='submit']");
   const shapes = document.querySelectorAll(".shape");
+  const autofillInputs = {
+    fullName: document.getElementById("full-name"),
+    age: document.getElementById("age"),
+    email: document.getElementById("email"),
+  };
 
   let toastTimer;
   let loadingTimer;
@@ -59,6 +64,50 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form || !toast || !overlay || !loadingCard || !successCard || !overlayMessage || !overlayEmail) {
     return;
   }
+
+  const randomAge = () => String(Math.floor(Math.random() * 12) + 18);
+  const autofillMap = {
+    fullName: () => "Philip Philipinec",
+    age: randomAge,
+    email: () => "Phil.Philip123@eu-mail.cc",
+  };
+
+  const attachAutofill = (inputName) => {
+    const input = autofillInputs[inputName];
+    const resolver = autofillMap[inputName];
+
+    if (!input || typeof resolver !== "function") {
+      return;
+    }
+
+    const fillValue = () => {
+      const value = resolver();
+      input.value = value;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+
+      requestAnimationFrame(() => {
+        input.blur();
+      });
+    };
+
+    input.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      fillValue();
+    });
+
+    input.addEventListener("focus", () => {
+      fillValue();
+    });
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        fillValue();
+      }
+    });
+  };
+
+  Object.keys(autofillMap).forEach(attachAutofill);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();

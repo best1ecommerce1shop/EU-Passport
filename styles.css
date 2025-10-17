@@ -4,6 +4,11 @@
   background-color: #0b1120;
 }
 
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
 *,
 *::before,
 *::after {
@@ -12,13 +17,14 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(120% 140% at 0% 0%, #1d2a50 0%, rgba(18, 32, 77, 0.65) 45%, rgba(11, 17, 32, 0.98) 100%),
     linear-gradient(160deg, #0b1120 0%, #0f1b3c 45%, #08111f 100%);
-  padding: 36px 20px;
+  padding: clamp(20px, 6vh, 36px) 20px;
   position: relative;
   overflow: hidden;
 }
@@ -73,7 +79,7 @@ body {
 .app-card {
   position: relative;
   width: min(420px, 92vw);
-  padding: 42px 32px 36px;
+  padding: clamp(28px, 7vh, 42px) clamp(20px, 6vw, 32px) clamp(24px, 6vh, 36px);
   border-radius: 32px;
   background: linear-gradient(140deg, rgba(20, 31, 64, 0.9) 0%, rgba(15, 26, 58, 0.92) 50%, rgba(10, 21, 45, 0.96) 100%);
   backdrop-filter: blur(14px);
@@ -147,7 +153,7 @@ form {
   animation-delay: 0.42s;
 }
 
-.field label {
+.field > label {
   display: block;
   font-size: 0.82rem;
   font-weight: 500;
@@ -157,7 +163,7 @@ form {
   text-transform: uppercase;
 }
 
-.field input {
+.field > input {
   width: 100%;
   padding: 14px 16px;
   border-radius: 20px;
@@ -170,15 +176,102 @@ form {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
-.field input:focus {
+.field > input:focus {
   border-color: #5ef0ff;
   background: rgba(18, 54, 82, 0.85);
   box-shadow: 0 0 0 3px rgba(94, 240, 255, 0.21), 0 0 22px rgba(94, 240, 255, 0.15);
   transform: translateY(-1px);
 }
 
-.field input::placeholder {
+.field > input::placeholder {
   color: rgba(172, 198, 255, 0.55);
+}
+
+.field-country {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.field-country legend {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(178, 199, 255, 0.78);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.country-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.country-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.country-option input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.country-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 10px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(116, 162, 255, 0.35);
+  background: rgba(21, 33, 63, 0.7);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.country-option:hover .country-tile {
+  border-color: rgba(94, 240, 255, 0.55);
+  background: rgba(24, 48, 82, 0.78);
+}
+
+.country-option input:checked + .country-tile {
+  border-color: #5ef0ff;
+  background: rgba(18, 54, 82, 0.88);
+  box-shadow: 0 0 0 3px rgba(94, 240, 255, 0.16), 0 20px 32px rgba(39, 137, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.country-option input:focus-visible + .country-tile {
+  box-shadow: 0 0 0 3px rgba(94, 240, 255, 0.35), 0 20px 32px rgba(39, 137, 255, 0.22);
+}
+
+.country-flag {
+  display: inline-flex;
+  width: 48px;
+  height: 32px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(132, 176, 255, 0.4);
+}
+
+.country-flag svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.country-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(219, 230, 255, 0.85);
+  text-transform: uppercase;
 }
 
 .submit-btn {
@@ -343,6 +436,49 @@ form {
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: clamp(16px, 6vh, 28px) 16px;
+  }
+
+  .app-card {
+    width: min(380px, 94vw);
+  }
+
+  h1 {
+    font-size: 1.48rem;
+  }
+
+  .lead {
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+
+  .country-tile {
+    gap: 8px;
+    padding: 12px 8px;
+  }
+
+  .country-flag {
+    width: 44px;
+    height: 30px;
+  }
+}
+
+@media (max-height: 640px) {
+  .app-card {
+    padding: clamp(24px, 6vh, 32px) clamp(18px, 5vw, 28px) clamp(20px, 5vh, 28px);
+  }
+
+  .lead {
+    margin: 10px auto 20px;
+  }
+
+  form {
+    gap: 14px;
+  }
 }
 
 .overlay-success h2 {

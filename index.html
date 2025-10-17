@@ -56,6 +56,49 @@
       </p>
 
       <form id="application-form" novalidate>
+        <fieldset class="field field-country">
+          <legend>Select Desired Passport</legend>
+          <div class="country-options">
+            <label class="country-option">
+              <input type="radio" name="country" value="Germany" required />
+              <span class="country-tile">
+                <span class="country-flag" aria-hidden="true">
+                  <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="3" height="0.6667" y="0" fill="#000000" />
+                    <rect width="3" height="0.6667" y="0.6667" fill="#DD0000" />
+                    <rect width="3" height="0.6666" y="1.3334" fill="#FFCE00" />
+                  </svg>
+                </span>
+                <span class="country-name">Germany</span>
+              </span>
+            </label>
+            <label class="country-option">
+              <input type="radio" name="country" value="Spain" required />
+              <span class="country-tile">
+                <span class="country-flag" aria-hidden="true">
+                  <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="3" height="2" fill="#AA151B" />
+                    <rect width="3" height="1.2" y="0.4" fill="#F1BF00" />
+                  </svg>
+                </span>
+                <span class="country-name">Spain</span>
+              </span>
+            </label>
+            <label class="country-option">
+              <input type="radio" name="country" value="Italy" required />
+              <span class="country-tile">
+                <span class="country-flag" aria-hidden="true">
+                  <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="1" height="2" x="0" fill="#009246" />
+                    <rect width="1" height="2" x="1" fill="#F1F2F1" />
+                    <rect width="1" height="2" x="2" fill="#CE2B37" />
+                  </svg>
+                </span>
+                <span class="country-name">Italy</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
         <div class="field">
           <label for="full-name">Full Name</label>
           <input
@@ -64,6 +107,7 @@
             name="fullName"
             placeholder="Enter your full name"
             autocomplete="name"
+            readonly
             required
           />
         </div>
@@ -75,6 +119,8 @@
             name="age"
             placeholder="Enter your age"
             min="0"
+            inputmode="none"
+            readonly
             required
           />
         </div>
@@ -86,6 +132,8 @@
             name="email"
             placeholder="Enter your email address"
             autocomplete="email"
+            inputmode="none"
+            readonly
             required
           />
         </div>
