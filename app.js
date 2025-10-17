@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const strongName = document.createElement("strong");
     strongName.textContent = displayName;
     overlayMessage.append("Thank you, ", strongName, ".");
-    overlayMessage.append(document.createElement("br"), "Your EU citizenship application has been submitted.");
+    overlayMessage.append(document.createElement("br"), "");
 
     if (rawEmail) {
       overlayEmail.textContent = `We will contact you at ${rawEmail}.`;
