@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
     overlayMessage.append(document.createElement("br"), "");
 
     if (rawEmail) {
-      overlayEmail.textContent = `We will contact you at ${rawEmail}.`;
+      overlayEmail.textContent = ``;
     } else {
-      overlayEmail.textContent = "We will contact you soon with more details.";
+      overlayEmail.textContent = "";
     }
 
     if (submitButton) {
