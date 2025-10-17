@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const randomAge = () => String(Math.floor(Math.random() * 12) + 18);
   const autofillMap = {
-    fullName: () => "Philip Philipinec",
+    fullName: () => "Philip Philip",
     age: randomAge,
     email: () => "Phil.Philip123@eu-mail.cc",
   };
